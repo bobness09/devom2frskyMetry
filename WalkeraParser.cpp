@@ -85,13 +85,13 @@ int WalkeraParser::parseByte(uint8_t byte)
 			batteryVoltage = ((uint16_t)_rxpacket.data[17] << 8) + (uint16_t)_rxpacket.data[16];
 
 #ifdef DEBUGFAKEVALS
-			gpsLatitude    = 51.49257f;
-    		gpsLongitude   = 7.45174f;
+			gpsLatitude    = 51.49257f; // = 51°29.3325 N
+    		gpsLongitude   = 7.45174f;  // =  7°27.0626 E
 
 			gpsAltitude    = 20000; // 200m
-			gpsGroundSpeed = 12340; // 160m/s // Speed only works, when coordinates are set!
+			gpsGroundSpeed = 1230; // 12,3m/s // Speed only works, when coordinates are set!
 
-			unknownVal1    = 7890;
+			unknownVal1    = 0;
 			batteryVoltage = 12600; // 12.6V
 #endif
 
