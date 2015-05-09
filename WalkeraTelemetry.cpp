@@ -212,10 +212,9 @@ float WalkeraTelemetry::gpsDdToDdMmSsFormat(float ddm)
 float WalkeraTelemetry::gpsDdToDdMmMmmFormat(float ddm)
 {
 	int deg = (int)ddm;
-	float min_dec = (ddm - deg) * 60.0f;
-	float min_low = min_dec - (int)min_dec;
+	float mm = (ddm - deg) * 60.0f;
 
-	return (float)deg * 100.0f + (int)min_dec + min_low;
+	return (float)deg * 100.0f + mm;
 }
 
 int WalkeraTelemetry::_dehex(char a) {
