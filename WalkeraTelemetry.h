@@ -62,7 +62,9 @@ public:
 
 private:
 	int _dehex(char a);
-	float gpsDdToDmsFormat(float ddm);
+	float gpsDdToDdMmSsFormat(float ddm);
+	float gpsDdToDdMmMmmFormat(float ddm);
+
 	SoftwareSerial* debugPort; 
 	WalkeraParser wParser;
 

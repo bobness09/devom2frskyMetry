@@ -27,7 +27,7 @@
 #define HEARTBEATFREQ 500
 
 // Do not enable both at the same time
-#define DEBUG
+//#define DEBUG
 //#define DEBUGFRSKY
 
 // Comment this to run simple telemetry protocol
@@ -64,7 +64,7 @@ void setup() {
 		; // wait for serial port to connect. Needed for Leonardo only
 	}
 
-	Serial.println("Starting Devo-M 2 FrSky Telemetry 1.0!");
+	Serial.println("Starting Devo-M 2 FrSky Telemetry 1.0.1!");
 
 // Debug serial port pin 12 tx 11 rx
 #ifdef DEBUG
@@ -106,7 +106,7 @@ void setup() {
 	FlexiTimer2::set(200, 1.0/1000, sendFrSkyData); // call every 200 1ms "ticks"
 	FlexiTimer2::start();
 
-	#ifdef DEBUG
+#ifdef DEBUG
 	debugSerial->println("Initialization done.");
 	debugSerial->print("Free ram: ");
 	debugSerial->print(freeRam());
@@ -162,8 +162,8 @@ void sendFrSkyData()
 	{
 		frSky->sendFrSky1Hz(frSkySerial, dataProvider);
 #ifdef DEBUG
-		//debugSerial->println("Begin frSky->printValues");
-		//frSky->printValues(debugSerial, dataProvider);
+		debugSerial->println("Begin frSky->printValues");
+		frSky->printValues(debugSerial, dataProvider);
 #endif
 	}
 	else						 // Send 200 ms frame

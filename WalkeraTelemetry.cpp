@@ -102,12 +102,12 @@ const int WalkeraTelemetry::getBatteryVoltage()
 
 const float WalkeraTelemetry::getLatitude()
 {
-	return gpsDdToDmsFormat(wParser.getGpsLatitude());
+	return gpsDdToDdMmMmmFormat(wParser.getGpsLatitude());
 }
 
 const float WalkeraTelemetry::getLongitude()
 {
-	return gpsDdToDmsFormat(wParser.getGpsLongitude());
+	return gpsDdToDdMmMmmFormat(wParser.getGpsLongitude());
 }
 
 const float WalkeraTelemetry::getGpsAltitude()
@@ -197,15 +197,25 @@ const int WalkeraTelemetry::getDate()
 	return 0;
 }
 
-// We receive the GPS coordinates in ddd.dddd format
-// FrSky wants the dd mm.mmm format so convert.
-float WalkeraTelemetry::gpsDdToDmsFormat(float ddm)
+// dd.dddd to dd° mm' ss.s'' converter, not used!
+float WalkeraTelemetry::gpsDdToDdMmSsFormat(float ddm)
 {
 	int deg = (int)ddm;
 	float min_dec = (ddm - deg) * 60.0f;
 	float sec = (min_dec - (int)min_dec) * 60.0f;
 
 	return (float)deg * 100.0f + (int)min_dec + sec / 100.0f;
+}
+
+// We receive the GPS coordinates in ddd.dddd format
+// FrSky wants the dd° mm.mmm' format so convert.
+float WalkeraTelemetry::gpsDdToDdMmMmmFormat(float ddm)
+{
+	int deg = (int)ddm;
+	float min_dec = (ddm - deg) * 60.0f;
+	float min_low = min_dec - (int)min_dec;
+
+	return (float)deg * 100.0f + (int)min_dec + min_low;
 }
 
 int WalkeraTelemetry::_dehex(char a) {
